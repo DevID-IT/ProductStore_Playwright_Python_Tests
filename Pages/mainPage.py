@@ -25,3 +25,11 @@ class MainPage:
         assert alert.message == expected_message, f"Expected alert message '{expected_message}', but got '{alert.message}'"
         alert.accept()
         self.logger.info(f"Alert message verified: {expected_message}")
+
+    @allure.step(f"Clicking Login button and filling the form - {1}")
+    def click_and_fill_login(self, username, password):
+        self.page.get_by_role("link", name="Log in").click()
+        self.page.locator("#loginusername").fill(username)
+        self.page.locator("#loginpassword").fill(password)
+        self.page.get_by_role("button", name="Log in").click()
+        self.logger.info("Login form filled and submitted")
